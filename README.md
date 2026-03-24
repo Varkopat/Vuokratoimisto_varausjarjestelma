@@ -13,6 +13,7 @@ Toimistotilojen varausjärjestelmä fiktiiviselle yritykselle nimeltä Vuokratoi
 - ostettujen lisäpalvelujen ja vuokrattujen laitteiden raportointi aikajaksolla valituissa toimipisteissä
 
 ### TODO:
+
 Mahdollisuus tehdä paperi- ja sähköpostilaskut.
 
 ## Käyttöohjeet
@@ -21,4 +22,4 @@ Mahdollisuus tehdä paperi- ja sähköpostilaskut.
 
 2. Anna seuraavaksi HeidiSQL:n asetuksissa täydet oikeudet opiskelija-nimiselle käyttäjälle. Tämä tapahtuu seuraavasti:
 
-Työkalut -> Käyttäjähallinta -> Lisää -> Allow access to -kentässä annetaan kaikki oikeudet Global privileges -valinnassa.
+Työkalut -> Käyttäjähallinta -> Lisää -> Tee uusi käyttäjä nimeltä opiskelija -> Allow access to -kentässä annetaan kaikki oikeudet Global privileges -valinnassa.
