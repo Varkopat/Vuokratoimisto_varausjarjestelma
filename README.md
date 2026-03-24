@@ -2,7 +2,7 @@
 
 Toimistotilojen varausjärjestelmä fiktiiviselle yritykselle nimeltä Vuokratoimistot Oy.
 
-## Ominaisuudet:
+## Ominaisuudet
 
 - toimipisteiden hallinta
 - palveluiden hallinta
@@ -21,4 +21,4 @@ Mahdollisuus tehdä paperi- ja sähköpostilaskut.
 
 2. Anna seuraavaksi HeidiSQL:n asetuksissa täydet oikeudet opiskelija-nimiselle käyttäjälle. Tämä tapahtuu seuraavasti:
 
-Työkalut -> Käyttäjähallinta -> Lisää -> Allow access to -kentässä annetaan kaikki oikeudet Global privileges -valinnassa, jotta käyttäjä voi tehdä kaikkia muutoksia tietokantaan.
+Työkalut -> Käyttäjähallinta -> Lisää -> Allow access to -kentässä annetaan kaikki oikeudet Global privileges -valinnassa.
