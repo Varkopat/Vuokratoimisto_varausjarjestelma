@@ -1,0 +1,55 @@
+﻿<Window x:Class="Vuokratoimisto_projekti.Windows.UusiPalveluSivu"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Vuokratoimisto_projekti.Windows"
+         xmlns:cls="clr-namespace:Vuokratoimisto_projekti.Classes"
+        mc:Ignorable="d"
+        Title="Lisää uusi palvelu" Height="450" Width="800">
+    <Window.DataContext>
+        <cls:Palvelu/>
+    </Window.DataContext>
+    <StackPanel>
+
+        <!-- Palvelun lisäys -->
+        <GroupBox Header="Palvelu">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <GroupBox Header="Valitse huone">
+                    <ComboBox x:Name="comHuoneet"
+                              DisplayMemberPath="Nimi" SelectedValue="{Binding HuoneID}" SelectedValuePath="HuoneID" />
+                </GroupBox>
+                <GroupBox Grid.Row="1" Header="Nimi">
+                    <TextBox TextWrapping="Wrap" Text="{Binding Nimi}" />
+                </GroupBox>
+                <GroupBox Grid.Row="2" Header="Tyyppi">
+                    <TextBox TextWrapping="Wrap" Text="{Binding Tyyppi}" />
+                </GroupBox>
+                <GroupBox Grid.Row="3" Header="Kuvaus">
+                    <TextBox TextWrapping="Wrap" Text="{Binding Kuvaus}" />
+                </GroupBox>
+                <GroupBox Grid.Column="1" Header="Hinta">
+                    <TextBox TextWrapping="Wrap" Text="{Binding Hinta}"/>
+                </GroupBox>
+                <GroupBox Grid.Column="1" Grid.Row="1" Header="ALV">
+                    <TextBox TextWrapping="Wrap" Text="{Binding ALV}" />
+                </GroupBox>
+                <Button x:Name="BtnLisaa" Content="Talenna" Grid.Row="4" Grid.Column="1" Margin="197,4,53,14" Click="TallennaUusiPalvelu_Click" />
+                <Button x:Name="BtnPeruuta" Content="Peruuta" Grid.Row="4" Grid.Column="1" Margin="10,4,240,14" Click="Peruuta_Click" />
+            </Grid>
+        </GroupBox>
+
+    </StackPanel>
+</Window>

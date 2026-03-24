@@ -1,0 +1,29 @@
+﻿<Window x:Class="Vuokratoimisto_projekti.Windows.AsiakasMuuttaminen"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Vuokratoimisto_projekti.Windows"
+        mc:Ignorable="d"
+        Title="AsiakasMuuttaminen" Height="450" Width="800">
+    <Canvas>
+        <!-- Asiakkaan tiedot -->
+        <Label Content="Asiakas ID" Canvas.Left="10" Canvas.Top="20" />
+        <TextBox Canvas.Left="107" Text="{Binding ID}" Canvas.Top="24" Width="189" IsEnabled="False" />
+        <Label Content="Nimi" Canvas.Left="10" Canvas.Top="50" />
+        <TextBox Canvas.Left="107" TextWrapping="Wrap" Text="{Binding Nimi}" Canvas.Top="57" Width="189" HorizontalAlignment="Left" VerticalAlignment="Center" />
+        <Label Content="Lähiosoite" Canvas.Left="10" Canvas.Top="80" />
+        <TextBox Canvas.Left="107" TextWrapping="Wrap" Text="{Binding Lahiosoite}" Canvas.Top="87" Width="189" HorizontalAlignment="Left" VerticalAlignment="Center" />
+        <Label Content="Postitoimipaikka" Canvas.Left="10" Canvas.Top="110" />
+        <TextBox Canvas.Left="107" TextWrapping="Wrap" Text="{Binding Postitoimipaikka}" Canvas.Top="118" Width="189" />
+
+        <Label Content="Postinro" Canvas.Left="331" Canvas.Top="50" HorizontalAlignment="Left" VerticalAlignment="Top" />
+        <TextBox Canvas.Left="400" Text="{Binding Postinro}" Canvas.Top="57" Width="189" HorizontalAlignment="Left" VerticalAlignment="Center" />
+        <Label Content="Email" Canvas.Left="331" Canvas.Top="80" HorizontalAlignment="Left" VerticalAlignment="Center" />
+        <TextBox Canvas.Left="400" TextWrapping="Wrap" Text="{Binding Email}" Canvas.Top="87" Width="189" HorizontalAlignment="Left" VerticalAlignment="Center" />
+        <Label Content="Puhelin" Canvas.Left="331" Canvas.Top="110" HorizontalAlignment="Left" VerticalAlignment="Top" />
+        <TextBox Canvas.Left="400" TextWrapping="Wrap" Text="{Binding Puhelinnro}" Canvas.Top="118" Width="189" HorizontalAlignment="Center" VerticalAlignment="Top" />
+        <Button Content="Muuta" Canvas.Left="400" Canvas.Top="153" HorizontalAlignment="Left" VerticalAlignment="Top" Width="73" Click="Muuta_Click" Height="32" RenderTransformOrigin="0.506,0.597"/>
+        <Button Content="Peruuta" Canvas.Left="516" Canvas.Top="154" Width="73" Height="32"  Click="Peruuta_Click" RenderTransformOrigin="0.506,0.597" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+    </Canvas>
+</Window>

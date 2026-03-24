@@ -1,0 +1,32 @@
+﻿<Window x:Class="Vuokratoimisto_projekti.Windows.PalvelunMuokkaus"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Vuokratoimisto_projekti.Windows"
+        mc:Ignorable="d"
+       Title="PalvelunMuokkaus" Height="565" Width="895">
+
+    <Grid>
+        <Label Content="Palvelut" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold"/>
+        <DataGrid Name="PalvelutDataGrid" AutoGenerateColumns="False" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" Width="866" Height="421" ItemsSource="{Binding Palvelut}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Palvelu ID" Binding="{Binding PalveluID}" IsReadOnly="True" Width="100"/>
+                <DataGridTextColumn Header="Huone ID" Binding="{Binding HuoneID}" Width="100"/>
+                <DataGridTextColumn Header="Nimi" Binding="{Binding Nimi}" Width="150"/>
+                <DataGridTextColumn Header="Tyyppi" Binding="{Binding Tyyppi}" Width="100"/>
+                <DataGridTextColumn Header="Kuvaus" Binding="{Binding Kuvaus}" Width="200"/>
+                <DataGridTextColumn Header="Hinta" Binding="{Binding Hinta}" Width="100"/>
+                <DataGridTextColumn Header="ALV" Binding="{Binding ALV}" Width="100"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+
+        <Button Content="Lisää uusi palvelu" HorizontalAlignment="Left" Margin="20,481,0,0" VerticalAlignment="Top" Width="120" Height="32" Click="LisaaUusiPalvelu_Click"/>
+        <Button x:Name="Sulje" Content="Sulje" HorizontalAlignment="Left" Margin="370,481,0,0" VerticalAlignment="Top" Width="73" Height="32" Click="Sulje_Click" RenderTransformOrigin="0.535,0.609"/>
+        <Button Content="Muokkaa" HorizontalAlignment="Left" Margin="162,481,0,0" VerticalAlignment="Top" Width="73" Height="32" Click="Muokkaa_Click"/>
+        <Button Content="Poista" HorizontalAlignment="Left" Margin="263,481,0,0" VerticalAlignment="Top" Width="74" Height="32" Click="Poista_Click"/>
+
+
+    </Grid>
+</Window>

@@ -1,0 +1,64 @@
+﻿<Application x:Class="Vuokratoimisto_projekti.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Vuokratoimisto_projekti"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+
+        <!-- Käytettävät värit -->
+        <SolidColorBrush x:Key="ButtonsColour" Color="Orange"/>
+        <SolidColorBrush x:Key="WindowBackgroundColour" Color="#E6E6E6"/> <!-- Ikkunan tausta -->
+        <SolidColorBrush x:Key="BoxBackground" Color="White"/>
+        <SolidColorBrush x:Key="BlackForeground" Color="Black"/>
+        
+        <!-- Ikkunat -->
+        <Style TargetType="Window">
+            <Setter Property="Background" Value="{StaticResource WindowBackgroundColour}"/> <!-- Ikkunan tausta -->
+        </Style>
+        
+        <!-- Text blocks-->
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="12"/>
+            <!-- Text blockin fontti -->
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+        </Style>
+        
+        <!-- Comboboxit -->
+        <Style TargetType="ComboBox">
+            <Setter Property="Background" Value="{StaticResource BoxBackground}"/>
+        </Style>
+        
+        <Style TargetType="ComboBoxItem">
+            <Setter Property="Foreground" Value="{StaticResource BlackForeground}"/>
+            <Setter Property="FontSize" Value="12"/>
+        </Style>
+
+
+        <!-- Näppäinten tyylittely -->
+        <Style TargetType="Button">
+            <Setter Property="Foreground" Value="{StaticResource BlackForeground}"/>
+            <Setter Property="Background" Value="{StaticResource ButtonsColour}"/>
+            <Setter Property="Margin" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="8" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <!-- Painike muuttaa väriä kun hiiri yläpuolella -->
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#d0ebff"/>
+                </Trigger>
+                <!-- Kun klikataan -->
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="#d0ebff"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+    </Application.Resources>
+</Application>
