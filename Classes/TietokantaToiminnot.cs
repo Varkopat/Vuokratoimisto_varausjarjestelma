@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,16 +14,31 @@ namespace Vuokratoimisto_projekti.Classes
 {
     public class TietokantaToiminnot
     {
-        private const string local = "Server=127.0.0.1; Port=3306; User ID=opiskelija; Pwd=opiskelija1;";
-        private const string localWithDb = "Server=127.0.0.1; Port=3306; User ID=opiskelija; Pwd=opiskelija1; Database=varausjarjestelma;";
-        /// <summary>
-        /// Hakee toimipisteet tietokannasta
-        /// </summary>
-        /// <returns>Toimipiste-tyyppinen observablecollection</returns>
-        public ObservableCollection<Toimipiste> HaeToimipisteet()
+		private readonly string connectionString;
+
+        public TietokantaToiminnot()
+        {
+			// Haetaan connectionString asetus App.config tiedostosta
+			connectionString = ConfigurationManager.ConnectionStrings["local"].ConnectionString;
+
+			var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+			// Salataan app.config
+			if (!config.ConnectionStrings.SectionInformation.IsProtected)
+			{
+				config.ConnectionStrings.SectionInformation.ProtectSection("DataProtectionConfigurationProvider");
+				config.Save();
+			}
+		}
+
+		/// <summary>
+		/// Hakee toimipisteet tietokannasta
+		/// </summary>
+		/// <returns>Toimipiste-tyyppinen observablecollection</returns>
+		public ObservableCollection<Toimipiste> HaeToimipisteet()
         {
             var toimipisteet = new ObservableCollection<Toimipiste>();
-            using (MySqlConnection conn = new MySqlConnection(localWithDb))
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
             {
                 conn.Open();
                 MySqlCommand cmd = new MySqlCommand("SELECT * FROM toimipiste", conn);
@@ -50,7 +66,7 @@ namespace Vuokratoimisto_projekti.Classes
         public ObservableCollection<Toimipiste> HaeToimipisteetPerKaupunki(string kaupunki)
         {
             var toimipisteet = new ObservableCollection<Toimipiste>();
-            using (MySqlConnection conn = new MySqlConnection(localWithDb))
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
             {
                 conn.Open();
                 MySqlCommand cmd = new MySqlCommand("SELECT * FROM toimipiste WHERE postitoimipaikka = @kaupunki", conn);
@@ -80,7 +96,7 @@ namespace Vuokratoimisto_projekti.Classes
         /// <param name="toimipiste"></param>
         public void PoistaToimipiste(Toimipiste toimipiste)
         {
-            using (MySqlConnection conn = new MySqlConnection(localWithDb))
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
             {
                 conn.Open();
                 MySqlCommand cmd = new MySqlCommand("DELETE FROM toimipiste WHERE toimipiste_id=@id", conn);
@@ -94,7 +110,7 @@ namespace Vuokratoimisto_projekti.Classes
         /// <param name="toimipiste"></param>
         public void LisaaToimipiste(Toimipiste toimipiste)
         {
-            using (MySqlConnection conn = new MySqlConnection(localWithDb))
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
             {
                 conn.Open();
                 MySqlCommand cmd = new MySqlCommand("INSERT INTO toimipiste(nimi, lahiosoite, postitoimipaikka, postinro, email, puhelinnro) " +
@@ -115,7 +131,7 @@ namespace Vuokratoimisto_projekti.Classes
         /// <param name="toimipiste"></param>
         public void PaivitaToimipiste(Toimipiste toimipiste, ObservableCollection<Huone> huoneet)
         {
-            using (MySqlConnection conn = new MySqlConnection(localWithDb))
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
             {
                 conn.Open();
 
@@ -169,7 +185,7 @@ namespace Vuokratoimisto_projekti.Classes
         public ObservableCollection<Huone> HaeToimipisteenHuoneet(Toimipiste toimipiste)
         {
             var huoneet = new ObservableCollection<Huone>();
-            using (MySqlConnection conn = new MySqlConnection(localWithDb))
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
             {
                 conn.Open();
                 MySqlCommand cmd = new MySqlCommand("SELECT * FROM huone WHERE toimipiste_id=@id", conn);
@@ -197,7 +213,7 @@ namespace Vuokratoimisto_projekti.Classes
         public ObservableCollection<Palvelu> HaeHuoneenPalvelut(Huone huone)
         {
             var palvelut = new ObservableCollection<Palvelu>();
-            using (MySqlConnection conn = new MySqlConnection(localWithDb))
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
             {
                 conn.Open();
                 MySqlCommand cmd = new MySqlCommand("SELECT * FROM varausjarjestelma.palvelu JOIN varausjarjestelma.huone ON varausjarjestelma.palvelu.huone_id = varausjarjestelma.huone.huone_id WHERE varausjarjestelma.huone.huone_id=@id", conn);
@@ -224,7 +240,7 @@ namespace Vuokratoimisto_projekti.Classes
 
         public void LisaaAsiakas(Asiakas asiakas)
         {
-            using (MySqlConnection conn = new MySqlConnection(localWithDb))
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
             {
                 conn.Open();
                 MySqlCommand cmd = new MySqlCommand(
@@ -248,7 +264,7 @@ namespace Vuokratoimisto_projekti.Classes
             int id = 0;
             string query = "SELECT asiakas_id FROM asiakas WHERE nimi = @Nimi";
 
-            using (MySqlConnection conn = new MySqlConnection(localWithDb))
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
             {
                 conn.Open();
                 MySqlCommand cmd = new MySqlCommand(query, conn);
@@ -266,7 +282,7 @@ namespace Vuokratoimisto_projekti.Classes
 
         public void LisaaVaraus(Varaus varaus)
         {
-            using (MySqlConnection conn = new MySqlConnection(localWithDb))
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
             {
                 conn.Open();
                 MySqlCommand cmd = new MySqlCommand(
@@ -290,7 +306,7 @@ namespace Vuokratoimisto_projekti.Classes
         public ObservableCollection<Palvelu> HaeKaikkiPalvelut()
         {
             var palvelut = new ObservableCollection<Palvelu>();
-            using (MySqlConnection conn = new MySqlConnection(localWithDb))
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
             {
                 conn.Open();
                 MySqlCommand cmd = new MySqlCommand("SELECT * FROM palvelu", conn);
@@ -316,7 +332,7 @@ namespace Vuokratoimisto_projekti.Classes
 
         public void PaivitaPalvelu(Palvelu palvelu)
         {
-            using (MySqlConnection conn = new MySqlConnection(localWithDb))
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
             {
                 conn.Open();
                 MySqlCommand cmd = new MySqlCommand("UPDATE palvelu SET huone_id=@huoneID, nimi=@nimi, tyyppi=@tyyppi, kuvaus=@kuvaus, hinta=@hinta, alv=@alv WHERE palvelu_id=@palveluID", conn);
@@ -333,7 +349,7 @@ namespace Vuokratoimisto_projekti.Classes
 
         public void LisaaPalvelu(Palvelu palvelu)
         {
-            using (MySqlConnection conn = new MySqlConnection(localWithDb))
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
             {
                 conn.Open();
                 MySqlCommand cmd = new MySqlCommand("INSERT INTO palvelu (huone_id, nimi, tyyppi, kuvaus, hinta, alv) VALUES (@huoneID, @nimi, @tyyppi, @kuvaus, @hinta, @alv)", conn);
@@ -351,7 +367,7 @@ namespace Vuokratoimisto_projekti.Classes
         public ObservableCollection<Huone> HaeKaikkiHuoneet()
         {
             var huoneet = new ObservableCollection<Huone>();
-            using (MySqlConnection conn = new MySqlConnection(localWithDb))
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
             {
                 conn.Open();
                 MySqlCommand cmd = new MySqlCommand("SELECT * FROM huone", conn);
@@ -375,7 +391,7 @@ namespace Vuokratoimisto_projekti.Classes
         {
             var toimipisteetJaHuoneet = new ObservableCollection<ToimipisteenHuone>();
 
-            using (MySqlConnection conn = new MySqlConnection(localWithDb))
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
             {
                 conn.Open();
                 MySqlCommand cmd = new MySqlCommand("SELECT huone_id, postitoimipaikka, toimipisteen_nimi, huoneen_nimi, kapasiteetti FROM ToimipisteetJaHuoneet", conn);
@@ -401,7 +417,7 @@ namespace Vuokratoimisto_projekti.Classes
 
         public void PoistaPalvelu(Palvelu palvelu)
         {
-            using (MySqlConnection conn = new MySqlConnection(localWithDb))
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
             {
                 conn.Open();
                 MySqlCommand cmd = new MySqlCommand("DELETE FROM palvelu WHERE palvelu_id=@id", conn);
@@ -412,7 +428,7 @@ namespace Vuokratoimisto_projekti.Classes
 
         public void LisaaLasku(Lasku lasku)
         {
-            using (MySqlConnection conn = new MySqlConnection(localWithDb))
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
             {
                 conn.Open();
                 MySqlCommand cmd = new MySqlCommand("INSERT INTO `lasku` (`lasku_id`, `varaus_id`, " +
