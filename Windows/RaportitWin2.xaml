@@ -166,7 +166,7 @@
         <Border Grid.Row="2" Background="LightGray" Padding="20" BorderBrush="Gray" BorderThickness="0,1,0,0">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button Content="Tulosta" x:Name="TulostaBtn" Click="TulostaBtn_Click" Height="35" Width="120" Margin="0,0,10,0" Background="Green" Foreground="White"/>
-                <Button Content="Asiakastiedot" x:Name="VieAsiakasTietoihinBtn" Click="VieAsiakasTietoihinBtn_Click" Height="35" Width="120" Margin="0,0,10,0" Background="Orange" Foreground="White"/>
+                <Button Content="Sähköpostilasku" x:Name="LaheLaskunSahkopostilla" Click="LaheLaskunSahkopostilla_Click" Height="35" Width="120" Margin="0,0,10,0" Background="Blue" Foreground="White"/>
                 <Button Content="Takaisin" x:Name="TakaisinBtn" Click="TakaisinBtn_Click" Height="35" Width="120" Background="Gray" Foreground="White"/>
             </StackPanel>
         </Border>
