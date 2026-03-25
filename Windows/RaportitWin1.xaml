@@ -25,16 +25,22 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-
-                        <TextBlock Text="{Binding}" Margin="5" Width="300" TextWrapping="Wrap"/>
-
+                        <TextBlock Text="{Binding ID}" Margin="5" Width="25"/>
+                        <TextBlock Text="{Binding AsiakasNimi}" Margin="5" Width="100"/>
+                        <TextBlock Text="{Binding VarauksenAlkuPvm, StringFormat=dd.MM.yyyy}" Margin="5" Width="125"/>
+                        <TextBlock Text="{Binding VarauksenLoppuPvm, StringFormat=dd.MM.yyyy}" Margin="5" Width="125"/>
+                        <TextBlock Text="{Binding Postitoimipaikka}" Margin="5" Width="100"/>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <TextBlock HorizontalAlignment="Center" Margin="0,25,0,0" TextWrapping="Wrap" Text="Raportti" VerticalAlignment="Top" FontFamily="Freestyle Script" FontSize="24" RenderTransformOrigin="0.481,-0.405"/>
+        
+        <TextBlock HorizontalAlignment="Center" Margin="0,25,0,0" TextWrapping="Wrap" Text="Raportit" VerticalAlignment="Top" FontFamily="Freestyle Script" FontSize="24" RenderTransformOrigin="0.481,-0.405"/>
 
-        <Button Content="Takaisin" x:Name="TakaisinBtn" Click="TakaisinBtn_Click" Margin="35,0,0,10" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Bottom"  Height="28" Width="122" RenderTransformOrigin="-0.479,0.499"/>
+        <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Left" Margin="35,0,0,10" Height="40" VerticalAlignment="Bottom">
+            <Button Content="Avaa" x:Name="AvaaBtn" Click="AvaaBtn_Click" Height="28" Width="122"/>
+            <Button Content="Takaisin" x:Name="TakaisinBtn" Click="TakaisinBtn_Click" Height="28" Width="122" Margin="10,0,0,0"/>
+        </StackPanel>
 
     </Grid>
 </Window>

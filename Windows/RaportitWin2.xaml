@@ -5,8 +5,170 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Vuokratoimisto_projekti.Windows"
         mc:Ignorable="d"
-        Title="Raportit" Height="450" Width="800">
+        Title="Laskun Yksityiskohdat" Height="600" Width="900" Background="WhiteSmoke">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Otsikko -->
+        <Border Grid.Row="0" Background="DarkSlateGray" Padding="20">
+            <TextBlock Text="LASKU" FontSize="32" FontWeight="Bold" Foreground="White" TextAlignment="Center"/>
+        </Border>
+
+        <!-- Sisältö -->
+        <ScrollViewer Grid.Row="1" Padding="20" VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+                <!-- Laskun perustiedot -->
+                <GroupBox Header="Laskun Perustiedot" Margin="0,0,0,15" Padding="15">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="Laskun ID:" FontWeight="Bold"/>
+                        <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding ID}"/>
+
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="Luontipäivä:" FontWeight="Bold"/>
+                        <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding VarattuPvm, StringFormat=dd.MM.yyyy}"/>
+
+                        <TextBlock Grid.Row="2" Grid.Column="0" Text="Eräpäivä:" FontWeight="Bold"/>
+                        <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding DueDate, StringFormat=dd.MM.yyyy}"/>
+
+                        <TextBlock Grid.Row="3" Grid.Column="0" Text="Laskutustapa:" FontWeight="Bold"/>
+                        <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding LaskutusTapa}"/>
+                    </Grid>
+                </GroupBox>
+
+                <!-- Asiakastiedot -->
+                <GroupBox Header="Asiakastiedot" Margin="0,0,0,15" Padding="15">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="Asiakkaan Nimi:" FontWeight="Bold"/>
+                        <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding AsiakasNimi}"/>
+
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="Osoite:" FontWeight="Bold"/>
+                        <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Lahiosoite}"/>
+
+                        <TextBlock Grid.Row="2" Grid.Column="0" Text="Postinumero:" FontWeight="Bold"/>
+                        <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Postinro}"/>
+
+                        <TextBlock Grid.Row="3" Grid.Column="0" Text="Postitoimipaikka:" FontWeight="Bold"/>
+                        <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Postitoimipaikka}"/>
+                    </Grid>
+                </GroupBox>
+
+                <!-- Varauksen tiedot -->
+                <GroupBox Header="Varauksen Tiedot" Margin="0,0,0,15" Padding="15">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="Toimipiste:" FontWeight="Bold"/>
+                        <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding ToimipisteenNimi}"/>
+
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="Varauksen Alku:" FontWeight="Bold"/>
+                        <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding VarauksenAlkuPvm, StringFormat=dd.MM.yyyy}"/>
+
+                        <TextBlock Grid.Row="2" Grid.Column="0" Text="Varauksen Loppu:" FontWeight="Bold"/>
+                        <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding VarauksenLoppuPvm, StringFormat=dd.MM.yyyy}"/>
+
+                        <TextBlock Grid.Row="3" Grid.Column="0" Text="Päivähinta:" FontWeight="Bold"/>
+                        <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding ToimipisteenPaivahinta, StringFormat=F2}"/>
+                    </Grid>
+                </GroupBox>
+
+                <!-- Palvelut -->
+                <GroupBox Header="Tilatut Palvelut" Margin="0,0,0,15" Padding="15">
+                    <ItemsControl ItemsSource="{Binding Palvelut}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border BorderBrush="LightGray" BorderThickness="0,0,0,1" Padding="0,5">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="100"/>
+                                            <ColumnDefinition Width="80"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBlock Grid.Column="0" Text="{Binding Nimi}" FontWeight="Bold"/>
+                                        <TextBlock Grid.Column="1" Text="{Binding Hinta, StringFormat=F2}" TextAlignment="Right"/>
+                                        <TextBlock Grid.Column="2" Text="€" Margin="5,0,0,0"/>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </GroupBox>
+
+                <!-- Summat -->
+                <GroupBox Header="Yhteenveto" Margin="0,0,0,15" Padding="15">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="200"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="Summa (ilman ALV):" FontWeight="Bold"/>
+                        <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Summa, StringFormat=F2}" TextAlignment="Right" FontWeight="Bold"/>
+
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="ALV (%):" FontWeight="Bold"/>
+                        <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding ALV, StringFormat=F1}" TextAlignment="Right" FontWeight="Bold"/>
+
+                        <Border Grid.Row="2" Grid.ColumnSpan="2" Background="LightBlue" Padding="10" Margin="0,10,0,0">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="200"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="Yhteensä:" FontWeight="Bold" FontSize="14"/>
+                                <TextBlock Grid.Column="1" Text="{Binding Summa, StringFormat=F2}" TextAlignment="Right" FontWeight="Bold" FontSize="14"/>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </GroupBox>
+            </StackPanel>
+        </ScrollViewer>
+
+        <!-- Napit -->
+        <Border Grid.Row="2" Background="LightGray" Padding="20" BorderBrush="Gray" BorderThickness="0,1,0,0">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Content="Tulosta" x:Name="TulostaBtn" Click="TulostaBtn_Click" Height="35" Width="120" Margin="0,0,10,0" Background="Green" Foreground="White"/>
+                <Button Content="Asiakastiedot" x:Name="VieAsiakasTietoihinBtn" Click="VieAsiakasTietoihinBtn_Click" Height="35" Width="120" Margin="0,0,10,0" Background="Orange" Foreground="White"/>
+                <Button Content="Takaisin" x:Name="TakaisinBtn" Click="TakaisinBtn_Click" Height="35" Width="120" Background="Gray" Foreground="White"/>
+            </StackPanel>
+        </Border>
     </Grid>
 </Window>
