@@ -18,12 +18,12 @@ namespace Vuokratoimisto_projekti.Classes
 
         public TietokantaToiminnot()
         {
-			// Haetaan connectionString asetus App.config tiedostosta
+			// Haetaan connectionString asetus App.config-tiedostosta
 			connectionString = ConfigurationManager.ConnectionStrings["local"].ConnectionString;
 
 			var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
 
-			// Salataan app.config
+			// Salataan App.config
 			if (!config.ConnectionStrings.SectionInformation.IsProtected)
 			{
 				config.ConnectionStrings.SectionInformation.ProtectSection("DataProtectionConfigurationProvider");
